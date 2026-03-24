@@ -1,0 +1,20 @@
+import java.util.*;
+ 
+ 
+class Main
+{   
+    //Algorithm
+    //1. Divide the array into 2 subarrays - left and right.
+    //2. 
+    public static maxSubarraySum(int[] arr)
+    {
+      
+    }
+ 
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	  int[] arr = {3, -2, 5, -1, 6, -3, 2, 7, -5};
+   
+      System.out.println("Maximum subarray sum of two non intersecting subarrays:"+ maxSubarraySum(arr));
+     }
+}
