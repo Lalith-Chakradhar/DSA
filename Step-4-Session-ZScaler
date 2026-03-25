@@ -1,1 +1,39 @@
-//Code
+import java.util.*;
+ 
+ 
+class Main
+{   
+    //Algorithm - TC O(n), SC - O(n)
+    //1. Find frequency of piles of boxes heights with box of heights keys in descending order.
+    //2. Add the values of frequencies in prefix sum fashion. Like as accumulated and steps.
+    //3. Return the sum which tells the minimum number of steps to reduce all heights to least height.
+    public static int pilesOfBoxes(int[] arr)
+    {
+       TreeMap<Integer, Integer> pileHeights = new TreeMap<>(Collections.reverseOrder());
+       int n = arr.length;
+       
+       for(int i=0; i<n; i++)
+       {
+       	pileHeights.put(arr[i], pileHeights.getOrDefault(arr[i],0)+1);
+       }
+       
+       int minimalSteps=0;
+       int accumulated = 0;
+       for(int val: pileHeights.values())
+       {
+		   	minimalSteps += accumulated;
+		   	accumulated += val;
+       }
+    	
+    	return minimalSteps;
+    }
+ 
+	public static void main (String[] args) throws java.lang.Exception
+	{
+	  int[] arr = {4, 5, 5, 2, 4};
+   
+      System.out.println("Minimal steps to reduce piles of boxes height: "+ pilesOfBoxes(arr));
+     }
+}
+
+URL for reference - https://ideone.com/kmjYWj
