@@ -1,0 +1,39 @@
+import java.util.*;
+import java.lang.*;
+
+class Main
+{	
+	//Algorithm
+	//1. Create a hashmamp to find first occurence of element's index.
+    //2. Now while iterating, if the element is already present, find the
+    // distance and calculate max distance.
+    //3. Return the max distance.
+	public static int maxDistance(int[] arr)
+	{
+	   HashMap<Integer, Integer> hm = new HashMap<>();
+       for(int i=0; i<arr.length; i++)
+       {
+         hm.putIfAbsent(arr[i],i); 
+       }
+       
+       int max = 0;
+       for(int i=0; i<arr.length; i++)
+       {
+         if(hm.containsKey(arr[i]))
+         {
+           max = Math.max(max,i-hm.get(arr[i]));
+         }
+       }
+       
+       return max;
+	}
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		int arr[] = {3, 2, 1, 2, 1, 4, 5, 8, 6, 7, 4, 2};
+		
+		System.out.println("Max distance between two elements: "+maxDistance(arr));
+	}
+}
+
+//URL - https://ideone.com/V1Ry5Q
