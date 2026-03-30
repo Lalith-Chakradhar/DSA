@@ -1,1 +1,85 @@
 https://leetcode.com/problems/longest-consecutive-sequence/
+
+
+class Solution {
+
+    // Idea - If the element's previous number is not in the list, then that becomes the starting point. With the help of the starting point, we can find other elements. 
+    //Algorithm - TC - O(n), SC - O(n)
+    //1. Put all the elements in a set.
+    //2. Now for each element, try finding whether it is a starting point.
+    //3.If the element is starting point, then run a seperate loop and check for other elements in the set. If they are present, increment sequence count and keep track of maxsequence count.
+    //4. Return max sequence count.
+
+     public int longestConsecutive(int[] nums){
+        
+        int n = nums.length;
+        if(n == 0)
+        {
+            return 0;
+        }
+
+        int maxSequenceCount = 0;
+        int sequenceCount = 0;
+        Set<Integer> numbers = new HashSet<>();
+
+        for(int i=0; i<n; i++)
+        {
+            numbers.add(nums[i]);
+        }
+
+        for(Integer num: numbers)
+        {
+            if(!numbers.contains(num-1))
+            {
+                sequenceCount = 0;
+                for(int i = num; numbers.contains(i); i++)
+                {
+                    sequenceCount++;
+                }
+
+                maxSequenceCount = Math.max(maxSequenceCount,sequenceCount);
+            }
+        }
+
+        return maxSequenceCount;
+     }
+
+
+    // //Algorithm - TC - O(nlogn), SC - O(1)
+    // //1. Sort the array
+    // //2. Now check for last smallest element and whether the current element - 1 achieves it. If not, keep this as last smallest element and reset count to zero. Otherwise, increment the count.
+    // //3. take the max max of count and store in a variable.
+    // //4. Return the max count variable.
+    // public int longestConsecutive(int[] nums) {
+    //     Arrays.sort(nums);
+    //     int n = nums.length;
+
+    //     if(n==0)
+    //     {
+    //         return 0;
+    //     }
+    //     int maxCount = 1;
+    //     int lastSmaller = Integer.MIN_VALUE;
+    //     int count = 1;
+    //     for(int i=0; i<n; i++)
+    //     {
+    //        if(nums[i]-1 == lastSmaller)
+    //        {
+    //             lastSmaller = nums[i];
+    //             count++;
+    //             maxCount = Math.max(maxCount,count);
+    //        }
+    //         else if(nums[i] == lastSmaller)
+    //         {
+    //             continue;
+    //         }
+    //         else
+    //         {
+    //             lastSmaller = nums[i];
+    //             count = 1;
+    //         }
+    //     }
+
+    //     return maxCount;
+    // }
+}
