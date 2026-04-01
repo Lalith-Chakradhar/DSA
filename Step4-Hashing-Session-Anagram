@@ -1,0 +1,35 @@
+https://leetcode.com/problems/valid-anagram/description/
+
+class Solution {
+    //Algorithm
+    //1. Store frequency of each letter in first string.
+    //2. Now iterate second string and verify the frequency and the letters. If it failes, return false.
+    //3. Return true.
+    public boolean isAnagram(String s, String t) {
+        HashMap<Character, Integer> freq = new HashMap<>();
+        
+        int sLength = s.length();
+        int tLength = t.length();
+
+        if(sLength != tLength) return false;
+
+        for(int i=0; i<sLength; i++)
+        {
+          char ch = s.charAt(i);
+          freq.put(ch, freq.getOrDefault(ch,0)+1);
+        }
+
+        for(int j=0; j<tLength; j++)
+        {
+          char ch = t.charAt(j);
+          if(!freq.containsKey(ch))
+          {
+              return false;
+          }
+          
+          freq.put(ch, freq.get(ch)-1);
+        }
+
+        return !freq.values().stream().anyMatch(v->v!=0);
+    }
+}
