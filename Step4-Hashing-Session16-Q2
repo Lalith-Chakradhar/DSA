@@ -1,0 +1,45 @@
+https://www.geeksforgeeks.org/problems/count-subarray-with-given-xor/1
+
+class Solution {
+    
+    //Idea - 
+    // (prefixXor^k)^k = prefixXor . If current prefixXor == k, 
+    //then increment count. If prefixXor != k, 
+    //then find prefixXor^k in hashmap.  
+    
+    //Algorithm - TC - O(n), SC - O(n)
+    //1. Find prefixXor and store the frequency in the hashmap.
+    //2. If prefixXor == k, then increment count.
+    //3. If prefixXor!=k then prefixXor xor k should be present in hashmap.
+    //4. If present, increment count by frequency.
+    //5. Return count.
+    public long subarrayXor(int arr[], int k) {
+        // code here
+        
+        HashMap<Integer,Integer> freq = new HashMap<>();
+        int prefixSum = 0;
+        int prefixXor = 0;
+        int count = 0;
+        
+        int n = arr.length;
+        
+        for(int i=0; i<n; i++)
+        {
+            prefixXor = prefixXor ^ arr[i];
+            
+            if(prefixXor==k)
+            {
+                count++;
+            }
+            
+            if(freq.containsKey(prefixXor^k))
+            {
+                count += freq.get(prefixXor^k);
+            }
+            
+            freq.put(prefixXor, freq.getOrDefault(prefixXor,0)+1);
+        }
+        
+        return count;
+    }
+}
