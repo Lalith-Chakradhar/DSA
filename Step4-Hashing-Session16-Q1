@@ -1,1 +1,11 @@
-.
+class Solution {
+    //Idea - Calculate prefix sum and store in another array at each point.
+    //If you want to find in between subarray sums, then we should know that -
+    // (prefixSum - k) part + k part = currentPrefixSum. So if we are able to find (prefixSum - k) in hashmap
+    // then we found the subarray sum which is equal to k.
+    //Algorithm
+    //1. 
+    public int cntSubarrays(int[] arr, int k) {
+        
+    }
+}
