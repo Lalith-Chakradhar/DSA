@@ -1,48 +1,75 @@
+https://leetcode.com/problems/maximum-number-of-subsequences-after-one-inserting/
+
 class Solution {
+    //Algorithm
+    //1. We should first check three possible case insertions - 
+        //'L' / 'C' / 'T'. Also remember we can insert 'C' in n+1 positions.
+    //2. To maximize 'LCT' with 'L' insertion, we should maximize 'CT' suffix possibilities and suffix[i] should end at 'L'. So 'L' should be placed in the beginning.
+    //3. To maximize 'LCT' with 'T' insertion, we should maximize 'LC' prefix
+    //possiblities and prefix[i] should end at 'T'. So 'T' should be placed in the end.
+    //4. To maximize 'LCT' with 'C' insertions, we should insert between L and T possibilities. Now check max "LCT" insertions with "L" insertion, "C" insertion and "T" insertion.
     public long numOfSubsequences(String s) {
         int n = s.length();
-        long[] preL = new long[n + 2];
-        long[] preLC = new long[n + 2];
+
+        if(n<2) return 0;
         
-        long l = 0, lc = 0, countLCT = 0;
+        long suffixTArray[] = new long[n+2];
+        long prefixLArray[] = new long[n+2];
 
-        for (int i = 0; i < n; ++i) {
+        long t = 0L;
+        long ct = 0L;
+        long countLCT = 0L;
+
+        for(int i=n-1;i>=0; i--)
+        {
             char ch = s.charAt(i);
-            if (ch == 'L') {
-                l++;
-            } else if (ch == 'C') {
-                lc += l;
-            } else if (ch == 'T') {
-                countLCT += lc;
-            }
-            preL[i + 1] = l;
-            preLC[i + 1] = lc;
-        }
 
-        long[] sufT = new long[n + 5];
-        long[] sufCT = new long[n + 5];
-        long t = 0, ct = 0;
-
-        for (int i = n - 1; i >= 0; --i) {
-            char ch = s.charAt(i);
-            if (ch == 'T') {
+            if(ch=='T')
+            {
                 t++;
-            } else if (ch == 'C') {
-                ct += t;
             }
-            sufT[i + 1] = t;
-            sufCT[i + 1] = ct;
+            if(ch=='C')
+            {
+                ct += t; 
+            }
+            if(ch=='L')
+            {
+                countLCT += ct;
+            }
+
+            suffixTArray[i] = t;
         }
 
-        long answer1 = sufCT[1] + countLCT;    // insert 'L' at beginning
-        long answer2 = preLC[n] + countLCT;    // insert 'T' at end
+        long lMax = countLCT + ct; //new + existing
 
-        
-        long answer3 = 0;
-        for (int i = 1; i <= n; ++i) {
-            answer3 = Math.max(answer3, preL[i] * sufT[i + 1]);
+        long l = 0L;
+        long lc = 0L;
+        for(int i=0;i<n; i++)
+        {
+            char ch = s.charAt(i);
+
+            if(ch=='L')
+            {
+                l++;
+            }
+            if(ch=='C')
+            {
+                lc += l; 
+            }
+
+            prefixLArray[i] = l;
         }
 
-        return Math.max(answer1, Math.max(answer2, answer3 + countLCT));
+        long tMax = lc+countLCT;
+
+        long cMax = 0L;
+        for (int i = 0; i<=n; i++) {
+        long leftL = (i > 0) ? prefixLArray[i - 1] : 0;
+        long rightT = (i < n) ? suffixTArray[i] : 0;
+
+        cMax = Math.max(cMax, leftL * rightT + countLCT);
+    }
+
+        return Math.max(lMax, Math.max(cMax, tMax));
     }
 }
