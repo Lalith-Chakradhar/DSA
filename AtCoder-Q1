@@ -1,0 +1,12 @@
+Q) https://atcoder.jp/contests/dp/tasks/dp_a
+
+Sol) 
+    //Algorithm
+  	//1. Create empty dp array.
+  	//2. For i<2, min frog jump cost would be min val of current element with first element.
+  	//3. For i>=2, min frog jump cost will be either |current element - previous element| + dp[previousElementIndex]
+  	// |current element - 2nd previous element| + dp[2ndPreviousElementIndex].
+  	//4. Return the dp[n-1].
+
+
+https://ideone.com/CKs7R6
