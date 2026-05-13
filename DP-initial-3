@@ -1,0 +1,57 @@
+Problem - 1: We are given an array of integers(a[n]). 
+We are given multiple queries of the form: (1,i)) 
+which means we need to output the sum of all numbers from 'index-1' to index 'i' of the array.
+
+a[]={4,5,3,2,1}
+
+
+Create a array named dp of same size as a.
+
+
+Now for each i, find the sum.
+
+
+we already know dp[0] = 4
+
+start from dp of 1.
+
+
+https://ideone.com/XHk3hD
+
+===================================================================
+
+Problem - 2: We are given an array of integers - positive and negative. Select some elements from this array(select a subset) such that:- 
+ -> Sum of those elements is maximum(Sum of the subset is maximum)
+ -> No two elements in the subset should be consecutive.
+
+ EG: {2,4,6,7,8}
+ Ans:- 2+6+8=16
+
+
+Create a dp array of n+1 size.
+
+if(i-2<0)
+dp[i] = max(i,dp[i-1])
+else
+dp[i]=max(a[i]+dp[i-2], dp[i-1])
+
+
+https://ideone.com/bKCEAv
+
+======================================================================
+We are given two arrays. Select some elements from both of these arrays (select a subset) such that:-
+	-> Sum of those elements is maximum (Sum of the subset is maximum)
+	-> No 2 elements in the subset should be consectuive (Note:- If you select, say th 5th element from the Array-1, then you are not
+	allowed to select 4th element from either Array-1 or Array-2 nor are you allowed to select the 5th element from Array-2 all of them are considered consecutive.
+
+  //Algorithm -
+  //1. Out of the two arrays, take the max values out of the two for the best answer at each index position.
+	//2. Create a empty dp array out of best array size.
+	//3. Before the consecutiveness, take the max values for answer. After consecutivenenss range, 
+	// take either the max current value or sum of non consecutive values or do not consider at all.
+	//4. Return dp[n-1].
+
+
+https://ideone.com/dqhOev
+
+======================================================================
