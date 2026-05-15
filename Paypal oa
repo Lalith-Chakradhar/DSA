@@ -1,0 +1,95 @@
+A string is said to be a -interspace string if the absolute difference of the ASC values of every pair of adjacent characters is at most k For example "abac" is a k-interspace string for a 2 since the absolute difference between every adjacent character of it is at most 2. A substring is any group of contiguous characters in a string, For example, the substrings of abefabc, ab, bc, a, h, cl. A substring of a string is said to be interspace substring if the substring is a k-interspace string
+
+Given a string, word, and an integer, & find the longest k-interspace substring within word. If there are multiple substrings of the longest length, return the one that occurs first in word.
+
+For example:
+
+word wedding
+
+4-0
+
+The first occurring longest interspace substring is dd.
+
+word ababbacabóbb
+
+There are two -interspace substrings of length 6 ababba and aabbbb. The one that occurs first is ababba
+
+Function Description
+
+Complete the function longestKinterspaceSubstring in the editor below.
+
+longestKinterspaceSubstring has the following parameters)
+
+string word: the string to analyze
+
+int i maximum difference in character values
+
+Returns:
+
+string the first occurring longest k-interspace substring of the word
+
+Constraints
+
+sword/s 10
+
+Oxks25
+
+Each character of word e ascia-
+
+▼Input Format For Custom Testing
+
+The first line contains a string, word.
+
+The second line contains an integer, k.
+
+Sample Case 0
+
+Sample Input For Custom Testing
+
+STDIN
+
+Function
+
+hackerrank
+
+word
+
+"hackerrank"
+
+k=0
+
+Sample Output
+
+۲۳
+
+Explanation
+
+The first occurring longest O-interspace substring is rr.
+
+
+
+Sample Case 1
+
+Sample Input For Custom Testing
+
+STDIN
+
+Function
+
+ababbaca →
+
+word
+
+"ababbaca"
+
+1
+
+k=1
+
+Sample Output
+
+ababba
+
+Explanation
+
+The first occurring longest 7-interspacesbstring is ababba.
