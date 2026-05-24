@@ -1,0 +1,4 @@
+You are given a graph undirected unweighted G ; N nodes ;M edges and the source node is 1 ; 
+task is to find the shortest distance of all nodes from node number 1.
+
+https://ideone.com/PDBCtL
