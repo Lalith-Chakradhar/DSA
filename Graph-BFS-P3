@@ -1,0 +1,5 @@
+Given a graph G of N nodes and M edges ; 1st node is the source node ; print n answers. Answer for the ith line should be yes
+if you can visit the ith node from node 1 else no
+
+
+https://ideone.com/I9XQA1
