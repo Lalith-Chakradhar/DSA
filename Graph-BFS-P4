@@ -1,0 +1,126 @@
+Given a graph of N nodes, m edges, undirected, unweighted, for each node 'i' ; 
+find the number of shortest paths from source node to node 'i'
+
+Further corrections needed
+
+DIAGRAM - 
+    1 - 2
+  /       \
+0 - 3-4-5- 6
+  \      /
+    7 - 8
+input -
+
+9 10
+0 1
+1 2
+2 6
+0 3
+3 4
+4 5
+5 6
+0 7
+7 8
+8 6
+0
+6
+
+
+sol -
+
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Main
+{
+	//Algorithm
+	//1. Perform BFS.
+	//2. Now for each node store level. 
+	//3. We will find 1 shortest path at the earliest before traversing other nodes.
+	//4. So for the other nodes try doing distance of other node + 1 = distance of target node. (level[node]+1=level[target]).
+	//5. If true, then count it otherwise don't count.
+	public static int findShortestPathsToTarget(int n, int[][] input, int S, int D)
+	{
+		List<List<Integer>> adjList = new ArrayList<>();
+ 
+		int m = input.length;
+ 
+		for(int i = 0; i < n; i++) {
+		    adjList.add(new ArrayList<>());
+		}
+ 
+		for(int i=0; i<m; i++)
+		{
+			int n1 = input[i][0];
+			int n2 = input[i][1];
+ 
+			adjList.get(n1).add(n2); // add outwards edges.
+			adjList.get(n2).add(n1); // add inwards edges. outward+inward makes it bidirectional.
+		}
+		
+		
+		Queue<Integer> q = new LinkedList<>();
+		q.add(S);
+		
+		int[] visited = new int[n];
+		int[] level = new int[n];
+		visited[S] = 1;
+		level[S] = 0;
+		
+		while(!q.isEmpty())
+		{
+			int node = q.poll();
+			
+			for(int i=0; i<adjList.get(node).size(); i++)
+			{
+				int child = adjList.get(node).get(i);
+				if(visited[child] == 0)
+				{
+					q.add(child);
+					visited[child] = 1;
+					level[child] = level[node] + 1;
+				}
+			}
+			
+		}
+		
+		
+		int countShortestPaths = 0;
+		for(int i=0; i<n; i++)
+		{
+			if(level[i]+1 == level[D])
+			{
+				System.out.println(i+" "+D);
+				countShortestPaths++;
+			}
+		}
+		
+		return countShortestPaths;
+	}
+	
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+ 
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+ 
+		int input[][] = new int[m][2];
+ 
+		for(int i=0;i<m; i++)
+		{
+			input[i][0] = sc.nextInt();
+			input[i][1] = sc.nextInt();
+		}
+		
+		int S = sc.nextInt();
+		int D = sc.nextInt();
+ 
+		System.out.println("Count of shortest paths: "+findShortestPathsToTarget(n,input, S, D));
+	}
+}
