@@ -1,0 +1,55 @@
+1. n(C)R = n! / (r! * (n-r)!) - 
+Given N distinct things; number of ways to select R things from them;
+(not considering the internal ordering of the R things selected;) 
+
+2. n (C) r * r! - permutation of r things selected from N things;
+We want to know the number of ways to select R items from N distinct items; 
+but internal ordering is also considered;
+
+3. Find the number of arrays of size “N” where each number can be from range 1 to M;
+count all such arrays; which are strictly increasing 
+
+Sol) Write 1 to M 
+-> how many ways are there to select any N numbers from 1 to M 
+-> m (C) N = p
+-> trick is p is also the answer to this question:-
+count number of arrays of size N which are strictly increasing
+
+4. Stars and bars -
+-> Given k boxes; find the number of ways to put n balls in them. All n balls are same;  
+
+-> Given 2 boxes; find the number of ways to put 5 balls in it 
+
+-> (5,0)
+-> (4,1)
+-> (3,2)
+-> (2,3)
+-> (1,4)
+-> (0,5)
+
+-> 6 ways; formula is; -> (N+K-1) {C} (K-1) = (5+1) {c} 1 = 6C1 = 6; 
+
+-> This is same as the number of solutions to the equation; 
+
+-> x1 + x2 == n; x1>=0 x2>=0 
+
+-> n+2-1 C 2-1 
+
+-> IMPORTANT NOTE - Also we can easily get this result if we can divide the balls into partitions with blue sticks
+_ _ | _ _ | _
+
+-> We have total of 7 positions, if we know the 2 places where to keep the blue sticks, 
+then 7 C 2 will be the answer.
+
+
+-> Given two linear sequences of size N and M; find the number of ways to generate a sequence of N+M size; 
+such that order of both the sequences remain the same;
+
+-> [1 2]
+-> [3 4]
+-> 6 ways;
+-> In 4 places (m+n) we can insert 2 elements first - 4(C)2, 
+then remaining elements can be inserted in 1 way only
+-> n + m {C} m;
+
+
