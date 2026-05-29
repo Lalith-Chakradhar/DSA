@@ -1,0 +1,6 @@
+Find factors of number n
+
+https://ideone.com/PjrxU6
+
+
+We can further optimize since by just iterating till sqrt(n) . 
