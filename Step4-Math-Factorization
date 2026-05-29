@@ -1,6 +1,16 @@
 Find factors of number n
 
-https://ideone.com/PjrxU6
+https://ideone.com/T66WoQ
 
 
-We can further optimize since by just iterating till sqrt(n) . 
+We can further optimize since by just iterating till sqrt(n) . But instead of checking i , we should also consider n/i as factor.
+
+https://ideone.com/AmKBNR
+
+
+Find factors in the form of prime factors - 
+
+https://ideone.com/GoRRU5
+
+
+
