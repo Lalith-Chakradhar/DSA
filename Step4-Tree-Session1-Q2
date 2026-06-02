@@ -1,1 +1,6 @@
-Google Interview Problem.-> Given a Tree of ‘N’ Nodes and ‘N-1’ Edges; rooted at Node-1 ; each node is assigned either 1 or 0 ; for each node “i” ; find the number of 1’s on the shortest path from node 1 to node “i” 
+Google Interview Problem.-> Given a Tree of ‘N’ Nodes and ‘N-1’ Edges; rooted at Node-1 ; 
+each node is assigned either 1 or 0 ; for each node “i” ; 
+find the number of 1’s on the shortest path from node 1 to node “i” 
+
+
+https://ideone.com/xYXADi
