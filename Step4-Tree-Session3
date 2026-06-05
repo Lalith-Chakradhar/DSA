@@ -1,0 +1,28 @@
+Given an undirected acyclic graph with all of the vertices having at most 3 neighbours.
+Please find a vertex in the tree so that after getting the vertex as root it forms a valid binary tree
+
+//Tip - an undirected acyclic graph is a tree itself only when it is single connected component but no multiple edges.
+
+//But while interviewing to Google, followup questions should be asked - 
+
+Q) How many nodes possible?
+Ans) 10^5
+
+Q) Is it single connected component?
+Ans) Yes
+
+Q) Does it have multiple edges?
+Ans) No
+
+Q) Each node can have how many edges?
+Ans) atmost 3
+
+Write conclusions - 
+ -> The tree with root node can have 3 children and rest other nodes can have 2 children. 
+If rest nodes have 3 children, then edges will become 4, which is not staisying the constraints.
+
+-> If root of the tree has 2 children, the problem is already solved and no need to solve remaining problem.
+
+->If root have 3 children, then check for a child which is having 1 or 2 edges. It is a safe option to pick child with 1 edge and that would be your leaf node.
+
+Sol) https://ideone.com/PX0KUx
