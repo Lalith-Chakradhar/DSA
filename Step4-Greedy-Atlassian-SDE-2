@@ -1,3 +1,34 @@
+-> Interview Problem: Optimally Disconnecting Atlassian Islands
+Context: You’re working on a simulation tool at Atlassian that manages a network of islands connected by bridges. Initially, every island is connected to every other island. Each island has an "importance value" associated with it.
+A malicious agent, Alex (an Atlassian engineer), can destroy some bridges between islands, but only if the total destruction cost remains within a given budget. The cost to destroy the bridge between island i and island j is importance[i] * importance[j].
+Your colleague Jordan (an Atlassian employee) lives on island 1 and enjoys visiting other islands. After Alex destroys some bridges optimally to disconnect the network, we want to determine how many islands Jordan can still access, including his own. Alex wants to minimize this number 
+🧩 Problem Statement: You are given:
+An integer N — the number of islands.
+
+
+An array A of length N, where A[i] is the importance of the i-th island (1-indexed).
+
+
+A long integer C — the maximum total cost Alex can spend to destroy bridges.
+
+
+Each island is initially connected to every other island. Your task is to compute the minimum number of islands (including island 1) that Jordan can access after Alex destroys bridges optimally (to minimize the size of the connected component that contains island 1).
+🧾 Input:
+First line: integer T — number of test cases.
+
+
+For each test case:
+Line 1: Two integers N and C.
+
+
+Line 2: N integers A[1] A[2] ... A[N] — importance values.
+
+
+📤 Output: For each test case, output the minimum number of islands (including island 1) Jordan can visit
+
+
+
+
 /* package whatever; // don't place package name! */
 
 import java.util.*;
