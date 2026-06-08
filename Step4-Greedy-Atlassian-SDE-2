@@ -27,7 +27,60 @@ Line 2: N integers A[1] A[2] ... A[N] — importance values.
 📤 Output: For each test case, output the minimum number of islands (including island 1) Jordan can visit
 
 
+correct sol - import java.util.*;
 
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int t = sc.nextInt();
+
+        while (t-- > 0) {
+            int n = sc.nextInt();
+            long c = sc.nextLong();
+
+            long[] b = new long[n + 1];
+            long sum = 0;
+
+            for (int i = 1; i <= n; i++) {
+                b[i] = sc.nextLong();
+                sum += b[i];
+            }
+
+            Arrays.sort(b, 2, n + 1); // sort from index 2 to n
+
+            int answer = 0;
+
+            for (int do_it = 1; do_it <= n - 1; do_it++) {
+
+                long sum2 = 0;
+
+                // smallest do_it elements
+                for (int j = 2; j <= 2 + do_it - 1; j++) {
+                    sum2 += b[j];
+                }
+
+                long u1 = (sum - sum2) * sum2;
+
+                // largest do_it elements
+                sum2 = 0;
+                for (int j = n; j >= n - do_it + 1; j--) {
+                    sum2 += b[j];
+                }
+
+                u1 = Math.min(u1, (sum - sum2) * sum2);
+
+                if (u1 <= c) {
+                    answer = do_it;
+                }
+            }
+
+            System.out.println(n - answer);
+        }
+
+        sc.close();
+    }
+}
 
 /* package whatever; // don't place package name! */
 
