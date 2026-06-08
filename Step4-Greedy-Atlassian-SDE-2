@@ -27,7 +27,9 @@ Line 2: N integers A[1] A[2] ... A[N] — importance values.
 📤 Output: For each test case, output the minimum number of islands (including island 1) Jordan can visit
 
 
-correct sol - import java.util.*;
+correct sol -
+
+ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -82,6 +84,8 @@ public class Main {
     }
 }
 
+
+My sol -
 /* package whatever; // don't place package name! */
 
 import java.util.*;
