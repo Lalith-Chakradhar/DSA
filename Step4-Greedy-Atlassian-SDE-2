@@ -1,0 +1,78 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{	
+	//Algorithm - TC - O(Nlogn*N), SC - O(N)
+	//1. First sort all the array elements.
+	//2. Now inorder to find minimum cost to remove a node, we can do - node*(sum-node).For more than 1 nodes, 
+	// we can do (sum of nodes)*(remaining nodes sum).
+	//3. So, we need to either find first 2 nodes or last 2 nodes sum such that our cost is minimum and within the range.
+	//4. Return remaining nodes which can be visited.
+	
+	static int findNodesAfterRemoval(int N, int C, int[] importance)
+	{
+		Arrays.sort(importance, 2, N+1);
+		
+		int sum = 0;
+		int[] prefix = new int[N+1];
+		int[] suffix = new int[N+1];
+		
+		for(int i=1; i<=N; i++)
+		{
+			sum += importance[i];		
+		}
+		
+		prefix[2] = importance[2];
+		suffix[N] = importance[N];
+		for(int j=3; j<=N; j++)
+		{
+			prefix[j] += prefix[j-1];
+			suffix[N-(j-2)] += suffix[N-(j-3)];
+		}
+		
+		int ans = 0;
+		
+		//ild - IslandDestroyed
+		for(int ild=2; ild<=N-1; ild++)
+		{
+			int k = ild+1;
+			int sum1 = prefix[k]*(sum-prefix[k]);
+			
+			int l = ild-1;
+			int sum2 = suffix[N-l]*(sum-suffix[N-l]);
+			
+			int cost = Math.min(sum1, sum2);
+			if(cost<=C)
+			{
+				ans = N - ild; 	
+			}
+			
+			return ans;
+		}
+		
+	}
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt(); //Numer of islands
+		
+		int C = sc.nextInt();//cap
+		
+		int[] importance = new int[N+1];
+		
+		for(int i=1; i<=N ; i++)
+		{
+			importance[i] = sc.nextInt();//importance values
+		}
+		
+		int ans = findNodesAfterRemoval(N,C,importance);
+		
+		System.out.println("The number of nodes Jordan can visit after islands destruction: "+ans);
+	}
+}
