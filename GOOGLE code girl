@@ -1,0 +1,32 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Main
+{
+	//Algorithm
+	//1. For each number in the array, mark the min possible number and max possible number after 
+	//finding arr[i]+K and arr[i] - K and mark it with 1 in prefix sum array. 
+	//Instead of marking better add for overlapping ranges.
+	//Do the differential array trick.
+	//2. Now do prefix sum in prefix sum array such that you get max subsequence length and store in max variable.
+	//3. Return the max variable.
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++)
+		{
+			arr[i] = sc.nextInt();
+		}
+		
+		int K = sc.nextInt();
+		
+		findMaxSubsequenceLength(arr,K);
+	}
+}
