@@ -7,13 +7,82 @@ import java.io.*;
 /* Name of the class has to be "Main" only if the class is public. */
 class Ideone
 {
-	// Algorithm - TC - O(1440) SC - O(1440)
+	// Algorithm - TC - O(1440 + 1440) SC - O(1440)
 	//1. Convert each interval range into base time unit (minutes here).
 	//Now from 00:00 to 23:59, create a differential array where each minute is an index.
 	//2. Iterate the intervals and mark them in differential array.
 	//3. Now Iterate and add in prefix sum fashion in differential array. Also simultaneously check if
 	// differential array value is zero, then maintain a count of max number of minutes till it is zero.
 	//4. Then if it is greater than equal to k, return true otherwise return false.
+	public static String  getEarliestMeetTime(String[] events,int k)
+	{
+		int[] diffMinutes = new int[1441];
+		
+		for(int i=0; i<events.length; i++)
+		{
+			String event = events[i];
+			
+			String[] chunked = event.split(" ");
+			
+			String start = chunked[chunked.length-2];
+			String end = chunked[chunked.length-1];
+			
+			int baseStart = start.split(":")[0]*60 + start.split(":")[1];
+			int baseEnd = end.split(":")[0]*60 + end.split(":")[1];
+			
+			diffMinutes[baseStart] += 1;
+			diffMinutes[baseEnd+1] -= 1;
+		}
+		
+		int maxTime = 0;
+		int timeStamp = 0;
+		int time = 0;
+		
+		if(diffMinutes[0] == 0)
+		{
+			time++;
+			maxTime = Math.max(maxTime, time);
+		}
+		else
+		{
+			time = 0;
+		}
+		
+		for(int i=1; i<=1440; i++)
+		{
+			diffMinutes[i] += diffMinutes[i-1];
+			if(diffMinutes[i] == 0)
+			{
+				time++;
+				maxTime = Math.max(maxTime, time);
+			}
+			else
+			{
+				time = 0;
+			}
+		}
+		
+		//22:00 - 3:00 cases
+		int counter = 1440;
+		while(diffMinutes[counter] != 0)
+		{
+			int i = counter%1440
+			diffMinutes[i] += diffMinutes[i-1];
+			if(diffMinutes[i] == 0)
+			{
+				time++;
+				maxTime = Math.max(maxTime, time);
+			}
+			else
+			{
+				time = 0;
+			}
+			
+			counter++;
+		}
+		
+		return maxTime >= k ? true : false;
+	}
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		Scanner sc = new Scanner(System.in);
@@ -21,8 +90,11 @@ class Ideone
 		String[] events = new String[n];
 		for(int i=0; i<n; i++)
 		{
-			
+			events[i] = sc.nextLine();
 		}
-		getEarliestMeetTime
+		int k = sc.nextInt();
+		
+		String time = getEarliestMeetTime(events, k);
+		System.out.println("Earliest meet time:- "+time);
 	}
 }
