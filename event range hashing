@@ -1,0 +1,28 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	// Algorithm - TC - O(1440) SC - O(1440)
+	//1. Convert each interval range into base time unit (minutes here).
+	//Now from 00:00 to 23:59, create a differential array where each minute is an index.
+	//2. Iterate the intervals and mark them in differential array.
+	//3. Now Iterate and add in prefix sum fashion in differential array. Also simultaneously check if
+	// differential array value is zero, then maintain a count of max number of minutes till it is zero.
+	//4. Then if it is greater than equal to k, return true otherwise return false.
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		String[] events = new String[n];
+		for(int i=0; i<n; i++)
+		{
+			
+		}
+		getEarliestMeetTime
+	}
+}
