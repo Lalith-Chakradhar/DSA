@@ -1,0 +1,10 @@
+interface PriorityAnalyzer {
+    @UserMessage("Analyze the urgency of this support ticket: {{it}}")
+    Priority analyze(String ticketDescription);
+}
+
+// Instantiate proxy
+PriorityAnalyzer analyzer = AiServices.create(PriorityAnalyzer.class, model);
+
+// Returns a strongly-typed Enum (e.g., CRITICAL)
+Priority priority = analyzer.analyze("Payment gateway is down!");
