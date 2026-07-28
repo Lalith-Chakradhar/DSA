@@ -1,0 +1,83 @@
+https://ideone.com/8KXXDf
+
+
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	//Algorithm
+	//1. Iterate the array and store in hashmap all frequencies.
+	//2. If k-arr[i], is present then take the minimum frequency (arr[i],arr[j]) for arr[i] != arr[j].
+	// arr[i] == arr[j], then do freq/2. Add all these in a result variable.
+	//3. Return the result variable.
+	
+	public static int findMaxPairs(int[] arr, int k)
+	{
+		int n = arr.length;
+		
+		HashMap<Integer, Integer> hm = new HashMap<>();
+		
+		for(int i=0; i<n; i++)
+		{
+			hm.put(arr[i], hm.getOrDefault(arr[i],0)+1);
+		}
+		
+		int maxPairs = 0;
+		
+		for(int x : new HashSet<>(hm.keySet()))
+		{
+			int y = k - x;
+			if(hm.containsKey(y))
+			{
+				if(x != y)
+				{
+					maxPairs += Math.min(hm.get(x), hm.get(y));
+					hm.put(x,0);
+					hm.put(y,0);	
+				}
+				else
+				{
+					maxPairs += hm.get(x)/2;
+					hm.put(x,0);
+				}
+			}
+		}
+		
+		return maxPairs;
+	}
+	
+	public static int findMaxPairsForAnyK(int[] arr)
+	{
+		int n = arr.length;
+		int max = 0;
+		for(int i=0; i<n; i++)
+		{
+			for(int j=i+1; j<n; j++)
+			{
+				max = Math.max(max, findMaxPairs(arr, arr[i] + arr[j]));
+			}
+		}
+		
+		return max;
+	}
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		
+		int[] arr = new int[n];
+		
+		for(int i=0; i<n; i++)
+		{
+			arr[i] = sc.nextInt();
+		}
+		
+		System.out.println("Max number of pairs whose sum = K: "+ findMaxPairsForAnyK(arr));
+	}
+}
