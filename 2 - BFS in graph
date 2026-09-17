@@ -21,7 +21,18 @@ class Ideone
 		
 		while(!q.isEmpty())
 		{
+			int node = q.poll();
 			
+			System.out.print(node+" ");
+			
+			for(int child: adjList[node])
+			{
+				if(visited[child] == 0)
+				{
+					q.add(child);
+					visited[child] = 1;
+				}
+			}
 		}
 	}
 	
