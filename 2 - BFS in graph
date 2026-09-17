@@ -1,0 +1,54 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	//Algorithm
+	//1. Create a queue and store the root node in it. Mark root node as visited.
+	//2. Now until queue is empty, pop the inserted node and iterate the children.
+	//3. if the node is not visited, only then insert the child, print it and mark it as visited.
+	
+	public void performBFS(ArrayList<Integer>[] adjList, int root)
+	{
+		Queue<Integer> q= new LinkedList<>();
+		int[] visited = new int[adjList.length];
+		q.put(root);
+		visited[root] = 1;
+		
+		while(!q.isEmpty())
+		{
+			
+		}
+	}
+	
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		
+		ArrayList<Integer>[] b = new ArrayList[n];
+		
+		for(int i=0; i<n; i++)
+		{
+			b[i] = new ArrayList<Integer>();
+		}
+		
+		for(int i=0; i<m; i++)
+		{
+			int x = sc.nextInt();
+			int y = sc.nextInt();
+			
+			b[x].add(y);
+			b[y].add(x);
+		}
+		
+		int root = sc.nextInt();
+		
+		performBFS(b, root);
+	}
+}
