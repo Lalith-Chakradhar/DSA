@@ -1,0 +1,42 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Main
+{
+	//Algorithm
+	static void dfs(int[] adjList, int node, int[] visited)
+	{	
+		visited[node] = 1;
+		
+		for(int i=0;i<adjList[node]; i++)
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int e = sc.nextInt();
+		
+		ArrayList<Integer>[] adjList= new ArrayList[n];
+		
+		for(int i=0; i<n ;i++)
+		{
+			adjList[i] = new ArrayList<>();
+		}
+		
+		for(int i=0; i<e; i++)
+		{
+			int x = sc.nextInt();
+			int y = sc.nextInt();
+			
+			adjList[x].add(y);
+			adjList[y].add(x);
+		}
+		
+		int source = sc.nextInt();
+		
+		int[] visited = new int[n];
+		dfs(adjList, source, visited);
+	}
+}
