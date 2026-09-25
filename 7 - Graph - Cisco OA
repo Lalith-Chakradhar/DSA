@@ -1,16 +1,35 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
 {
-	static int c = 0;
+	static void dfs(Set<Integer> adjList, int[] used, int source, int[] compNum, int c)
+	{
+		used[source] = 1;
+		compNum[source] = c;
+		for(int child: adjList[source])
+		{
+			if(used[child]==0)
+			{
+				used[]
+			}
+		}
+	}
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		Scanner sc = new Scanner(System.in);
 		int pods = sc.nextInt();
 		int n = sc.nextInt();
 		
-		ArrayList<Integer>[] adjList = new ArrayList[n+1];
+		Set<Integer>[] adjList = new TreeSet[pods+1];
 		
-		for(int i=0; i<n; i++)
+		for(int i=1; i<pods+1; i++)
 		{
-			adjList[i] = new ArrayList<Integer>[];
+			adjList[i] = new TreeSet<Integer>();
 		}
 		
 		for(int i=0; i<n; i++)
@@ -20,6 +39,19 @@
 			
 			adjList[x].add(y);
 			adjList[y].add(x);
+		}
+		
+		int[] used = new int[pods+1];
+		int[] compNum = new int[pods+1];
+		int c = 0;
+		
+		for(int i=1; i<pods+1; i++)
+		{
+			if(used[i] == 0)
+			{
+				c++;
+				dfs(adjList, used, i,compNum, c);
+			}
 		}
 		
 		int q = sc.nextInt();
@@ -34,6 +66,7 @@
 			if(queries[i][0] == 2)
 			{
 				mark[queries[i][1]] = 1;
+				//find in p and then remove it
 			}
 			else if(queries[i][0] == 1)
 			{
@@ -43,12 +76,9 @@
 				}
 				else
 				{
-					dfs(queries[i][1]);	
+					//find first in p and then get the top element	
 				}
 			}
 		}
-		
-		
-		
 	}
 }
