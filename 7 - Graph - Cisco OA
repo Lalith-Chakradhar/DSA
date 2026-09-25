@@ -31,7 +31,21 @@
 			queries[i][0] = sc.nextInt();
 			queries[i][1] = sc.nextInt();
 			
-			
+			if(queries[i][0] == 2)
+			{
+				mark[queries[i][1]] = 1;
+			}
+			else if(queries[i][0] == 1)
+			{
+				if(mark[queries[i][1]] == 0)
+				{
+					System.out.print(queries[i][1]+" ");
+				}
+				else
+				{
+					dfs(queries[i][1]);	
+				}
+			}
 		}
 		
 		
