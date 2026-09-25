@@ -1,0 +1,40 @@
+{
+	static int c = 0;
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int pods = sc.nextInt();
+		int n = sc.nextInt();
+		
+		ArrayList<Integer>[] adjList = new ArrayList[n+1];
+		
+		for(int i=0; i<n; i++)
+		{
+			adjList[i] = new ArrayList<Integer>[];
+		}
+		
+		for(int i=0; i<n; i++)
+		{
+			int x = sc.nextInt();
+			int y = sc.nextInt();
+			
+			adjList[x].add(y);
+			adjList[y].add(x);
+		}
+		
+		int q = sc.nextInt();
+		int[][] queries = new int[q][2];
+		int[] mark = new int[n+1];
+		
+		for(int i=0; i<q; i++)
+		{
+			queries[i][0] = sc.nextInt();
+			queries[i][1] = sc.nextInt();
+			
+			
+		}
+		
+		
+		
+	}
+}
