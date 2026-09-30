@@ -14,29 +14,21 @@ class Ideone
 	//find factors and check for other component cells. If present, add the freq*val into total sed value.
 	//4. Now add back frequency of current component.
 	
-	static void dfs(int[][] grid, row, col, rowdelta, coldelta, compCount, compNumGrid)
+	static void dfs(int[][] grid, row, col, rowdelta, coldelta, compCount, componentNumberMap)
 	{
-		compNumGrid[row][col] = compCount;
+		componentNumberMap.put(grid[row][col], componentNumberMap.get(grid[row][col]).add(compCount));
 		
 		int r = grid.length;
 		int c = grid[0].length;
 		
 		for(int i = 0; i<rowdelta.length; i++)
 		{
-			for(int j = 0; j<coldelta.length; j++)
+			int nr = row + rowdelta[i];
+			int nc = col + coldelta[j];
+			
+			if(nr>=0 && nr<r && nc>=0 && nc<c && grid[i][j] != -1 && componentNumberMap.get(grid[nr][nc]).isEmpty())
 			{
-				if(rowdelta[i]!=0 && coldelta[j]!=0) // no diagonal iteration in the problem allowed
-				{
-					continue;
-				}
-				
-				int nr = row + rowdelta[i];
-				int nc = col + coldelta[j];
-				
-				if(nr>=0 && nr<r && nc>=0 && nc<c && grid[i][j] != -1 && compNumGrid[nr][nc]==0)
-				{
-					dfs(grid,nr,nc,rowdelta,coldelta,compCount,compNumGrid);
-				}
+				dfs(grid,nr,nc,rowdelta,coldelta,compCount,componentNumberMap);
 			}
 		}
 		
@@ -50,33 +42,39 @@ class Ideone
 		
 		int[][] grid = new int[rows][columns];
 		
-		HashMap<Integer,Integer> hm = new HashMap<>();
+		//To store component number. size - ssum of what all components it is present will give
+		//frequency of node value
+		Map<Integer,Set<Integer>> componentNumberMap = new HashMap<Integer, HashSet<Integer>>();
+		
 		for(int i=0; i<rows; i++)
 		{
 			for(int j=0; j<columns; j++)
 			{
 				grid[i][j] = sc.nextInt();
-				
-				if(grid[i][j] != -1)
-				{
-					hm.put(grid[i][j], hm.getOrDefault(grid[i][j],0)+1);
-				}
 			}
+			
+			if(grid[i][j] != -1)
+			{
+				componentNumberMap.put(grid[i][j], new HashSet<Integer>());
+			}
+			
 		}
 		
-		int[][] compNumGrid = new int[rows][columns];
 		int[] rowdelta = {-1, 1, 0, 0};
 		int[] coldelta = {0,0, -1, 1};
 		int compCount = 0;
+		
+		int r = grid.length;
+		int c = grid[0].length;
 		
 		for(int i=0; i<rows; i++)
 		{
 			for(int j=0; j<columns; j++)
 			{
-				if(grid[i][j] != -1 && compNum[i][j] == 0 ) // not visited yet
+				if(grid[i][j] != -1 && componentNumberMap.get(grid[i][j]) == null ) // not visited yet
 				{
 					compCount++;
-					dfs(grid,i,j,rowdelta,coldelta,compCount, compNumGrid);
+					dfs(grid,i,j,rowdelta,coldelta,compCount, componentNumberMap);
 				}
 				
 			}
@@ -84,11 +82,29 @@ class Ideone
 		
 		int totalSed = 0;
 		
+		for(int i=1; i<=compCount; i++)
+		{
+			for(int j=0; j<r; j++)
+			{
+				for(int k=0; k<c; k++)
+				{
+					if(componentNumberMap.get(grid[j][k]).contains(i))
+					{
+						totalSed += (componentNumberMap.get(grid[j][k]).size()-1)*grid[j][k];
+					}
+					else
+					{
+						//find factors
+						int num = 2*grid[i][j];
+						for(int l=num; l<1000000; l+=num)
+						{
+							if()
+						}
+					}
+				}
+			}
+		}
+		
+		
 	}
 }
-
-input - 
-3 3
-5 10 -1
--1 15 20
-25 -1 30
