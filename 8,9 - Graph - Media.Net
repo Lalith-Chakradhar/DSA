@@ -8,13 +8,15 @@ import java.io.*;
 class Ideone
 {
 	//Algorithm
-	//1. Perform dfs of all unblocked nodes in 2d matrix. Find each node component number and store in array.
-	//2. Find sed value by checking whether the value is multiple of current node, it is from other component and it should have some compNum array value.  
-	//3. Return the sed value;
+	//1. Perform dfs of all unblocked nodes in 2d matrix. Find each node component number.
+	//2. Now find sed value for all the cells. Find frequency of all nodes in hashmap.
+	//3. Inorder to find sed value, for current component cells, remove these cells from hashmap and
+	//find factors and check for other component cells. If present, add the freq*val into total sed value.
+	//4. Now add back frequency of current component.
 	
 	static void dfs(int[][] grid, row, col, rowdelta, coldelta, compCount, compNum)
 	{
-		compNum[grid[i][j]] = compCount;
+		compNum[grid[row][col]] = compCount;
 		
 		int r = grid.length;
 		int c = grid[0].length;
@@ -45,9 +47,8 @@ class Ideone
 			for(int j=0; j<columns; j++)
 			{
 				grid[i][j] = sc.nextInt();
+				maxVal = Math.max(maxVal, grid[i][j]);
 			}
-			
-			maxVal = Math.max(maxVal, grid[i][j]);
 		}
 		
 		int[] compNum = new int[maxVal+1];
@@ -70,28 +71,32 @@ class Ideone
 		
 		int totalSed = 0;
 		
-		for(int k=1; k<=compCount; k++)
-		{
-			for(int i=0; i<rows; i++)
+		for(int i=0; i<rows; i++)
 			{
 				for(int j=0; j<columns; j++)
 				{
-					if(grid[i][j] != -1)
+					if(grid[i][j] == -1)
+					{
+						// Sed-value for blocked cells is -1
+						totalSed = (totalSed-1 + MOD) % MOD;
+					}
+					else
 					{
 						int curr = grid[i][j];
+						int currComp = compNum[grid[i][j]];
 						
-						for(int l=curr; l<=maxVal; l+=curr)
+						for(int mult=2*curr; mult<=maxVal; mult+=curr)
 						{
-							if(compNum[l] != 0 && compNum[l] !=k)
+							int multComp = compNum[mult];
+							if(compNum[mult] != 0 && currComp !=multComp)
 							{
-								totalSed += l;
+								totalSed = (totalSed + l) % MOD;
 							}
 						}
 					}
 				}
 			}
-		}
 		
-		return totalSed % 10000000;
+		System.out.println(totalSed);
 	}
 }
