@@ -1,0 +1,75 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	static int ops = 0;
+	public static void dfs(int[][] mat1, int[][] mat2, int[] visited, int source)
+	{
+		visited[source] = 1;
+		
+		for(int c=1; c<mat1[source].length; c++)
+		{
+			int val = mat1[source][c];
+			if(val == 1 && visited[c] == 0)
+			{
+				if(mat2[source][c]==0)
+				{
+					ops++;
+				}
+				dfs(mat1, mat2, visited, c);
+			}
+		}
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		
+		for(int i=0; i<t; i++)
+		{
+			int n = sc.nextInt();
+			
+			if(n==1) return 0;
+			
+			int m1 = sc.nextInt(); // edges in F
+			int m2 = sc.nextInt(); // edges in G
+			
+			int[][] FadjMatrix = new int[n+1][n+1];
+			int[][] GadjMatrix = new int[n+1][n+1];
+			
+			for(int k=1; k<=m1; k++)
+			{
+				int x = sc.nextInt();
+				int y = sc.nextInt();
+				
+				FadjMatrix[x][y] = 1;
+				FadjMatrix[y][x] = 1;
+			}
+			
+			for(int k=1; k<=m2; k++)
+			{
+				int x = sc.nextInt();
+				int y = sc.nextInt();
+				
+				GadjMatrix[x][y] = 1;
+				GadjMatrix[y][x] = 1;
+			}
+			
+			
+			if(m1>m2)
+			{
+				int[] visited = new int[n+1];
+				dfs(FadjMatrix, GadjMatrix, visited, 1);
+			}
+			else
+			{
+				dfs(GadjMatrix, FadjMatrix, visited, 1);
+			}
+		}
+	}
+}
