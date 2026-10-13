@@ -1,0 +1,35 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	//Algorithm
+	//1. Find out the priority of each song with other song mutually.
+	//2. So we should see how many instance of x > y in terms of preference occurs more than n/2 times. 
+	//If x > y occurs exactly n/2 times, then prefer the lower id.
+	//3. You will get the preference order here.
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		int m = sc.nextInt();
+		
+		int[][] preferenceInput = new int[n][m];
+		
+		for(int i=0; i<n; i++)
+		{
+			for(int j=0; j<m; j++)
+			{
+				preferenceInput[i][j] =sc.nextInt();
+			}
+		}
+		
+		//So we already know there are songs from 0 to m-1
+		//For each number check ho many times it is succeeding other number. 
+		//If it greater than n/2, 
+	}
+}
