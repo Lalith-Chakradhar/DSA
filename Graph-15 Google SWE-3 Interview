@@ -5,6 +5,19 @@ import java.lang.*;
 import java.io.*;
 
 /* Name of the class has to be "Main" only if the class is public. */
+
+class Edge {
+	int to;
+	int weight;
+	
+	Edge(to, weight)
+	{
+		this.to = to;
+		this.weight = weight;
+	}
+}
+
+
 class Ideone
 {
 	//Idea - Can we precompute power such that we can convert as weighted edges - +power - weight
@@ -14,7 +27,7 @@ class Ideone
 	//find out paths which has max energy. You have to do expansion but not relaxation.
 	//3. You get the path where max energy is there which tells minimum extra energy is required.
 	
-	static void dfsTopoSort(ArrayList<Integer<>>[] adjList, Stack<Integer> stk, int[] visited,int[] power, int source)
+	static void dfsTopoSort(ArrayList<Integer<>>[] adjList, Stack<Integer> stk, int[] visited, int source)
 	{
 		visited[source] = 1;
 		
@@ -35,14 +48,20 @@ class Ideone
 		int n = sc.nextInt();
 		int m = sc.nextInt();
 		
-		ArrayList<Integer<>>[] adjList = new ArrayList[n];
+		ArrayList<Edge>[] adjList = new ArrayList[n];
+		
+		for(int i=0; i<n; i++)
+		{
+			adjList[i] = new ArrayList<Edge>();
+		}
+		
 		for(int i=0; i<m; i++)
 		{
 			int x = sc.nextInt();
 			int y = sc.nextInt();
 			int edgeWeight = sc.nextInt();
 			
-			adjList[x].add(new ArrayList<>{y, edgeWeight});
+			adjList[x].add(new Edge(y, edgeWeight));
 		}
 		
 		int[] power = new int[n];
@@ -62,7 +81,18 @@ class Ideone
 			}
 		}
 		
+		int dist[] = new int[m];
+		Arrays.fill(dist, -1);
 		
-		
+		while(!stk.empty())
+		{
+			int node = stk.pop();
+			
+			for(int i=0; i<adjList[node].length; i++)
+			{
+				if(power[node] + adjList[node].get(i)
+			}
+			if(power[node]+adjList[node].get())
+		}
 	}
 }
