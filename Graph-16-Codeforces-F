@@ -1,0 +1,138 @@
+/* package whatever; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	//Algorithm
+	//1. Create fear relationship in Directed graph way. Mark the indegree and outdegree of each node.
+	//2. First do toposort using Kahn's algorithm. Since nodes with indegree is zero, 
+	//removing first will give 2x the price since they are not feared by other animal (independent).
+	//This will remove nodes which does not have cycles.
+	//3. Now only cyclic graph will remain. Do connected components traversal using dfs.
+	//4. Find min node, its index and next node location. This is important for writing the permutation for max selling price.
+	
+	static int min[] = new int[3];
+	min[0] = Integer.MAX_VALUE;
+	
+	static void dfs(ArrayList<Integer> adjList,int[] indegree, int[] visited,int[] cost, int source)
+	{
+		visited[source] = 1;
+		for(int child: adjList[source])
+		{
+			if(cost[child]<min[0])
+			{
+				min[0] = cost[child];
+				min[1] = child;
+				min[2] = adjList[child];
+			}
+			
+			if(visited[child]==0 && indegree[i]!=0)
+			{
+				dfs(adjList, indegree, visited, cost, source);
+			}
+		}
+		
+		min[2] = source
+	}
+	
+	static void topoSort(ArrayList<Integer>[] adjList, int[] indegree, int source, ArrayList<Integer> removedPermutation)
+	{
+		Queue<Integer> bfs = new LinkedList<>();
+		bfs.add(source);
+		
+		while(!bfs.isEmpty())
+		{
+			int node = bfs.poll();
+			
+			removedPermutation.add(node);
+			
+			for(int child: adjList[node])
+			{
+				indegree[child]--;
+				if(indegree[child]==0)
+				{
+					bfs.add(child);
+				}
+			}
+		}
+		
+	}
+	
+	static arr[] findBestPermutation(ArrayList<Integer>[] adjList,int[] indegree, int source, int[] cost, ArrayList<Integer> removedPermutation)
+	{
+		indegree[source] = 0;
+		int n = cost.length;
+		
+		for(int i=1; i<=n; i++)
+		{
+			if(indegree[i] == 0)
+			{
+				topoSort(adjList, indegree, source, removedPermutation);
+			}
+		}
+		
+		//Only cyclic components left
+		int[] visited = new int[n+1];
+		for(int i=1; i<=n; i++)
+		{
+			if(indegree[i] != 0 && visited[i] == 0)
+			{
+				dfs(adjList, indegree, visited,cost, i);
+				
+			}
+		}
+		
+	
+	}
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		
+		for(int i=0; i<T; i++)
+		{
+			int n = sc.nextInt();
+			int[] a = new int[n];
+			int[] cost = new int[n];
+			
+			for(int i=0; i<n; i++)
+			{
+				a[i] = sc.nextInt();
+			}
+			
+			for(int i=0; i<n; i++)
+			{
+				cost[i] = sc.nextInt();
+			}
+			
+			ArrayList<Integer>[] adjList = new ArrayList<>[n+1];
+			int[] indegree = new int[n+1];
+			
+			ArrayList<Integer> removedPermutation = new ArrayList<>();
+			
+			for(int i=0; i<n; i++)
+			{
+				adjList[i+1] = new ArrayList<>();
+				adjList[a[i]].add(i+1);
+				indegree[i+1]++;
+			}
+			
+			int source = 0;
+			for(int i=1; i<=n; i++)
+			{
+				if(indegree[i] == 0)
+				{
+					source = i;
+					break;
+				}
+			}
+			
+			System.out.println("Best possible permutation for max selling price: "+Arrays.toString(findBestPermutation(adjList, indegree, source, cost, removedPermutation)));
+		}
+		
+	}
+}
