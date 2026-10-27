@@ -1,0 +1,61 @@
+//GFG link
+//https://www.geeksforgeeks.org/problems/distance-of-nearest-cell-having-1-1587115620/1
+
+class Solution {
+    //Algorithm
+    //1. Do multisource bfs of nodes which are 1 until 0 is reached. That will
+    //be the minimum distance to reach 1. For this you can mark level of the nodes.
+    public ArrayList<ArrayList<Integer>> nearest(int[][] grid) {
+        int n = grid.length;
+        int m = grid[0].length;
+        ArrayList<ArrayList<Integer>> level = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+
+            for (int j = 0; j < m; j++) {
+                row.add(0);
+            }
+
+            level.add(row);
+        }
+        
+        Queue<int[]> q = new LinkedList<>();
+        
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                  if(grid[i][j] == 1)
+                  {
+                      q.add(new int[]{i,j});
+                  }
+            }
+        }
+        
+        int[] dr = {-1, 0, 1, 0};
+        int[] dc = { 0, 1, 0, -1};
+        
+        while(!q.isEmpty())
+        {
+            int[] a = q.poll();
+            int r = a[0];
+            int c = a[1];
+            
+            for(int i=0; i<dr.length; i++)
+            {
+                int dx = r + dr[i];
+                int dy = c + dc[i];
+                
+                if(dx>=0 && dx<n && dy>=0 && dy<m && level.get(dx).get(dy)==0 && grid[dx][dy] == 0)
+                {
+                    level.get(dx).set(dy,level.get(r).get(c)+1);
+                    q.add(new int[]{dx,dy});
+                }
+            }
+        }
+        
+        return level;
+        
+    }
+}
