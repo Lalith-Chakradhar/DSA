@@ -1,0 +1,10 @@
+Pennant Middle Layer: Term Loan Origination & LMS Integration | Sole Developer | JSW One Finance | [Month Year] – Present
+Java 17, Quarkus, Hibernate/Panache, [PostgreSQL], REST, React, TypeScript, React Query, JUnit, Jest, GCS
+
+Designed and built end to end a middle-layer service between the in-house ops portal and the Pennant Loan Management System. It runs a 4-step term-loan origination journey: customer onboarding, collateral, upfront fees and loan booking.
+Modelled each loan application as a composite record moving through a state machine (Draft → In Progress → Pending Checker → Approved / Sync Failed / Rejected). Customer creation and loan booking go through maker-checker approval with a full audit trail.
+Built payload assemblers that convert portal data into Pennant’s createCustomer and createFinance contracts. They cover individual and corporate customers, fees with GST, disbursements, collateral cover, PSL details and extended fields. The same code serves both the live preview and the actual sync.
+Built reliable sync to the Pennant system: automatic retries with backoff for temporary failures, a manual retry option, and row-level database locks so the background retry job and user actions never send the same request twice.
+Added data-protection controls: masked account data by default, unmasked data served only to authorised roles, PII-safe request logging, and all settings and secrets moved to environment variables for each environment.
+Developed the React/TypeScript frontend: multi-step forms with live validation, autosave drafts, maker/checker approval screens and live status refresh by polling. Server-side checks of the disbursement maths stop bad data before it reaches the Pennant system.
+Wrote unit tests with JUnit and Jest. Took the service from requirements through QA and UAT, working directly with business, credit operations and the Pennant vendor team.
