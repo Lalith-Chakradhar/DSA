@@ -8,3 +8,15 @@ Built reliable sync to the Pennant system: automatic retries with backoff for te
 Added data-protection controls: masked account data by default, unmasked data served only to authorised roles, PII-safe request logging, and all settings and secrets moved to environment variables for each environment.
 Developed the React/TypeScript frontend: multi-step forms with live validation, autosave drafts, maker/checker approval screens and live status refresh by polling. Server-side checks of the disbursement maths stop bad data before it reaches the Pennant system.
 Wrote unit tests with JUnit and Jest. Took the service from requirements through QA and UAT, working directly with business, credit operations and the Pennant vendor team.
+
+
+For 1 page resume - 
+Pennant Middle Layer: Term Loan Origination & LMS Integration | Sole Developer | [Month Year] – Present
+Java, Quarkus, Hibernate, [PostgreSQL], React, TypeScript, JUnit, Jest
+
+Built end to end, as the only developer, a middle-layer service between the ops portal and the Pennant Loan Management System, covering a 4-step loan journey: customer onboarding, collateral, upfront fees and loan booking.
+Designed a state machine with maker-checker approval and an audit trail, and payload assemblers that send customer and loan data to Pennant’s createCustomer and createFinance APIs.
+Made the Pennant sync reliable with automatic retries with backoff and row-level locks that prevent duplicate bookings. Masked account data for unauthorised roles and moved all settings and secrets to per-environment variables.
+Built the React/TypeScript frontend with multi-step forms, live validation, autosave and approval screens, and took the service from requirements through UAT with the business and vendor teams.
+
+
