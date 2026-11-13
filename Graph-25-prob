@@ -1,0 +1,93 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Ideone
+{
+	//Algorithm
+	//1. First find infected nodes in proximity range using bfs. Mark these nodes as infected.
+	//2. Now do bfs from source to destination. Check whether they are infected or not and then find length of shortest path.
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		int V = sc.nextInt();
+		int E = sc.nextInt();
+		
+		List<Integer> adjList[] = new ArrayList[V+1];
+		
+		for(int i=1 ;i<=V; i++)
+		{
+			adjList[i] = new ArrayList<>();
+		}
+		
+		for(int i=0; i<E; i++)
+		{
+			int a = sc.nextInt();
+			int b = sc.nextInt();
+			
+			adjList[a].add(b);
+			adjList[b].add(a);
+		}
+		
+		int infectedNode = sc.nextInt();
+		int k = sc.nextInt();
+		int source = sc.nextInt();
+		
+		int[] infected = new int[V + 1];
+		int[] dist = new int[V+1];
+		
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		
+		Queue<Integer> q = new LinkedList<>();
+		
+		//Infected nodes bfs
+		q.add(infected);
+		
+		while(!q.isEmpty())
+		{
+			int node = q.poll();
+			
+			for(int child: adjList[node])
+			{
+				
+			}
+		}
+		
+		q.add(source);
+		dist[source] = 0;
+		
+		
+		while(!q.isEmpty())
+		{
+			int node = q.poll();
+			
+			for(int child: adjList[node])
+			{
+				int newDist = dist[node] + 1;
+				
+				int newBlue = maxBlue[node] +
+                    (balls[child] == 'B' ? 1 : 0);
+                    
+				 // First time reaching this node
+                if (newDist < dist[child]) {
+
+                    dist[child] = newDist;
+                    maxBlue[child] = newBlue;
+
+                    q.offer(child);
+                }
+                // Another shortest path reaching this node
+                else if (newDist == dist[child]) {
+
+                    maxBlue[child] = Math.max(
+                        maxBlue[child], newBlue
+                    );
+                }
+			}
+		}
+		
+		System.out.println(maxBlue[V]);
+	}
+}
